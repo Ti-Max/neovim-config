@@ -11,6 +11,9 @@ require("mason-lspconfig").setup({
 		-- javascript
 		"tsserver",
 		"eslint",
+		-- elixir
+		-- DOES NOT WORK, you need to install it manually
+		--"elixirls",
 	},
 })
 
@@ -22,5 +25,8 @@ require("mason-tool-installer").setup({
 		"stylua",
 		-- formatter for: Angular, CSS, Flow, GraphQL, HTML, JSON, JSX, JavaScript, LESS, Markdown, SCSS, TypeScript, Vue, YAML
 		"prettierd",
+		--python
+		"black",
+		"autoflake",
 	},
 })

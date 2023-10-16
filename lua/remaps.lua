@@ -1,3 +1,4 @@
+-----------------------------VIM-----------------------------------------------
 vim.g.mapleader = " "
 
 -- default nvim file explorer
@@ -30,26 +31,73 @@ vim.keymap.set({ "n", "v" }, "<C-l>", "<C-w>l")
 vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j")
 vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k")
 
+vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
+vim.keymap.set("n", "<A-3>", ":ToggleTerm direction=float<CR>")
+vim.keymap.set("n", "<A-2>", ":ToggleTerm direction=vertical<CR>")
+
+-- open config
+vim.keymap.set("n", "<leader>i", ":e ~/.config/nvim/init.lua<CR>")
+vim.keymap.set("n", "<leader>Cp", ":e ~/.config/nvim/lua/plugins.lua<CR>")
+vim.keymap.set("n", "<leader>Cr", ":e ~/.config/nvim/lua/remaps.lua<CR>")
+vim.keymap.set("n", "<leader>Co", ":e ~/.config/nvim/lua/options.lua<CR>")
+
+---------------------------------PLUGINS-------------------------------------------
 -- NvimTree
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 
---------------------------------------------------------------
---LSP
-vim.keymap.set("n", "<leader>k", vim.diagnostic.open_float)
+-- Telescope
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+
+-- Buffers
+vim.keymap.set("n", "<S-l>", ":BufferLineCycleNext<CR>")
+vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>")
+vim.keymap.set("n", "<leader>bh", ":BufferLineCloseLeft<CR>")
+vim.keymap.set("n", "<leader>bl", ":BufferLineCloseRight<CR>")
+-- close current buffer
+vim.keymap.set("n", "<leader>c", ":bd<CR>")
+
+-- Search and replace
+vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").open()<CR>')
+vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>')
+vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>')
+vim.keymap.set("n", "<leader>ss", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>')
+
+-- diffview
+vim.keymap.set("n", "<leader>gw", "<cmd>DiffviewOpen<CR>")
+vim.keymap.set("n", "<leader>gq", "<cmd>DiffviewClose<CR>")
+
+----------------------------------LSP-----------------------------------------------
+-- diagnostics menu
+vim.keymap.set("n", "<leader>t", ":TroubleToggle<CR>")
+vim.keymap.set("t", "<leader>t", ":TroubleToggle<CR>")
+
+vim.keymap.set("n", "<leader>k", ":Lspsaga show_line_diagnostics<CR>")
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	group = vim.api.nvim_create_augroup("UserLspConfig<CR>", {}),
 	callback = function(ev)
 		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", opts)
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		-- this one has ANIMATION
+		vim.keymap.set("n", "gd", ":Lspsaga goto_definition<CR>", opts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+
+		-- FIXME show references in othe files of the project
+		-- use trouble because its better
+		vim.keymap.set("n", "gr", function()
+			require("trouble").open("lsp_references")
+		end, opts)
+
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
@@ -63,18 +111,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
---------------------------------------------------------------
---FORMATTING
+----------------------------------FORMATTING------------------------------------------
 vim.keymap.set("n", "<leader>lf", function()
-	vim.cmd("Format")
-	print("File formated")
-
-	-- Use builtin to lsp formatter
-	--	vim.lsp.buf.format({
-	--		async = true,
-	--		filter = function(client)
-	--      -- Never request typescript-language-server for formatting
-	--			return client.name ~= "tsserver" or client.name ~= "lua_ls"
-	--		end,
-	--	})
+	require("language.formatters").format_buffer()
 end)

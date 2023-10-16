@@ -13,7 +13,17 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 
-vim.mapleader = " "
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- always show the sign column, otherwise it would shift the text each time
+vim.opt.signcolumn = "yes"
+
+vim.opt.numberwidth = 2
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hls = true
 
 -- set colorscheme
-vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("tokyonight-moon")
