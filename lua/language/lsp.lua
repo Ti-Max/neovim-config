@@ -16,13 +16,29 @@ end
 
 -- python
 -- pyright is too strict
--- lsp_config.pyright.setup({
--- 	capabilities = capabilities,
--- })
-
-lsp_config.jedi_language_server.setup({
+lsp_config.pyright.setup({
 	capabilities = capabilities,
 })
+-- lsp_config.pylsp.setup({
+-- 	capabilities = capabilities,
+-- })
+-- lsp_config.pylyzer.setup({
+-- 	capabilities = capabilities,
+-- 	single_file_support = true,
+-- 	settings = {
+-- 		python = {
+--
+-- 			checkOnType = false,
+-- 			diagnostics = true,
+-- 			inlayHints = true,
+-- 			smartCompletion = true,
+-- 		},
+-- 	},
+-- })
+
+-- lsp_config.jedi_language_server.setup({
+-- 	capabilities = capabilities,
+-- })
 
 -- lua
 lsp_config.lua_ls.setup({
@@ -88,6 +104,14 @@ lsp_config.gopls.setup({
 
 -- c
 lsp_config.clangd.setup({
+	capabilities = capabilities,
+})
+
+-- Dockerfile
+lsp_config.dockerls.setup({})
+
+-- Rust
+lsp_config.rust_analyzer.setup({
 	capabilities = capabilities,
 })
 

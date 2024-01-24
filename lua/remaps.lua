@@ -53,10 +53,10 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 
 -- Buffers
-vim.keymap.set("n", "<S-l>", ":BufferLineCycleNext<CR>")
-vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>")
-vim.keymap.set("n", "<leader>bh", ":BufferLineCloseLeft<CR>")
-vim.keymap.set("n", "<leader>bl", ":BufferLineCloseRight<CR>")
+-- vim.keymap.set("n", "<S-l>", ":BufferLineCycleNext<CR>")
+-- vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>")
+-- vim.keymap.set("n", "<leader>bh", ":BufferLineCloseLeft<CR>")
+-- vim.keymap.set("n", "<leader>bl", ":BufferLineCloseRight<CR>")
 -- close current buffer
 vim.keymap.set("n", "<leader>c", ":bd<CR>")
 
@@ -111,7 +111,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- create JSDOC automatically
+vim.keymap.set("n", "<leader>ld", ":DogeGenerate<CR>")
+
 ----------------------------------FORMATTING------------------------------------------
 vim.keymap.set("n", "<leader>lf", function()
 	require("language.formatters").format_buffer()
 end)
+
+-- organize import using tsserver. Warnign: conflicts a bit with prettier formatter
+vim.keymap.set("n", "<leader>li", ":OrganizeImports<CR>")

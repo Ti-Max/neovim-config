@@ -28,6 +28,7 @@ function P.format_buffer()
 		or vim.bo.filetype == "glsl"
 		or vim.bo.filetype == "nix"
 		or vim.bo.filetype == "css"
+		or vim.bo.filetype == "html"
 	then
 		vim.cmd("silent FormatWrite")
 	else
@@ -53,6 +54,7 @@ require("formatter").setup({
 		javascript = { prettierd },
 		json = { prettierd },
 		css = { prettierd },
+		html = { prettierd },
 		glsl = { require("formatter.defaults.clangformat") },
 		nix = { require("formatter.filetypes.nix").nixpkgs_fmt },
 		["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },

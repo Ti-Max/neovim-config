@@ -9,6 +9,7 @@ lint.linters_by_ft = {
 	-- javascript = { 'eslint_d', }
 	python = { "flake8" },
 	elixir = { "credo" },
+	sh = { "credo" },
 }
 
 --

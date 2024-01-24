@@ -1,3 +1,4 @@
+-- vim.opt.mouse = ""
 vim.opt.relativenumber = true
 vim.opt.nu = true
 
@@ -26,4 +27,5 @@ vim.opt.smartcase = true
 vim.opt.hls = true
 
 -- set colorscheme
-vim.cmd.colorscheme("tokyonight-moon")
+vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("rose-pine")
