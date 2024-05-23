@@ -14,6 +14,8 @@ require("mason-lspconfig").setup({
 		-- elixir
 		-- DOES NOT WORK, you need to install it manually
 		--"elixirls",
+
+		"svelte",
 	},
 })
 
@@ -25,6 +27,9 @@ require("mason-tool-installer").setup({
 		"stylua",
 		-- formatter for: Angular, CSS, Flow, GraphQL, HTML, JSON, JSX, JavaScript, LESS, Markdown, SCSS, TypeScript, Vue, YAML
 		"prettierd",
+		-- tailwind
+		"tailwindcss",
+		"emmet_ls",
 		--python
 		"black",
 		"autoflake",

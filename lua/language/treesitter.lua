@@ -1,5 +1,6 @@
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
+		"html",
 		"lua",
 		"javascript",
 		"elixir",
@@ -10,6 +11,7 @@ require("nvim-treesitter.configs").setup({
 		"glsl",
 		"markdown",
 		"markdown_inline",
+		"svelte",
 	},
 	sync_install = false,
 	auto_install = false,
@@ -26,3 +28,6 @@ require("nvim-treesitter.configs").setup({
 	},
 	indent = { enable = true },
 })
+
+vim.treesitter.language.register("json", "gltf")
+vim.treesitter.language.register("html", "mjml")

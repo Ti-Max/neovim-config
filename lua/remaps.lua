@@ -26,10 +26,10 @@ vim.keymap.set("", "U", "<cmd>redo<CR>")
 vim.keymap.set("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>')
 
 -- navigate windows
-vim.keymap.set({ "n", "v" }, "<C-h>", "<C-w>h")
-vim.keymap.set({ "n", "v" }, "<C-l>", "<C-w>l")
-vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j")
-vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k")
+-- vim.keymap.set({ "n", "v" }, "<C-h>", "<C-w>h")
+-- vim.keymap.set({ "n", "v" }, "<C-l>", "<C-w>l")
+-- vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j")
+-- vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k")
 
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
 vim.keymap.set("n", "<A-3>", ":ToggleTerm direction=float<CR>")
@@ -121,3 +121,6 @@ end)
 
 -- organize import using tsserver. Warnign: conflicts a bit with prettier formatter
 vim.keymap.set("n", "<leader>li", ":OrganizeImports<CR>")
+
+-- Screenshot (Code Clip)
+vim.keymap.set("v", "<leader>cc", ":Silicon<CR>")

@@ -1,7 +1,7 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 # install for faster file sorting (for telescope)
-sudo apt-get install ripgrep -y
+# sudo apt-get install ripgrep -y
 
 # isntall elixir-ls (Installing through Mason doesn't work)
 curl -fLO https://github.com/elixir-lsp/elixir-ls/releases/download/v0.16.0/elixir-ls-v0.16.0.zip

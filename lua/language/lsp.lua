@@ -65,14 +65,40 @@ lsp_config.tsserver.setup({
 		},
 	},
 })
+
+lsp_config.rescriptls.setup({
+	cmd = { "rescript-language-server", "--stdio" },
+	capabilities = capabilities,
+	init_options = {
+		{
+			extensionConfiguration = {
+				askToStartBuild = false,
+
+				allowBuiltInFormatter = true,
+				inlayHints = {
+					enable = true,
+					maxLength = nil,
+				},
+				codeLens = true,
+			},
+		},
+	},
+})
+
 lsp_config.eslint.setup({
+	capabilities = capabilities,
+})
+
+lsp_config.svelte.setup({
 	capabilities = capabilities,
 })
 
 -- elixir
 lsp_config.elixirls.setup({
 	-- cmd = { "/home/timofei/.config/nvim/ls/elixir-ls/language_server.sh" },
-	cmd = { "/home/timofei/elixir-ls/release/language_server.sh" },
+	-- cmd = { "/Home/timokha/elixir-ls/language_server.sh" },
+	-- cmd = { "~/elixir-ls/language_server.sh" },
+	cmd = { "elixir-ls" },
 	capabilities = capabilities,
 })
 
