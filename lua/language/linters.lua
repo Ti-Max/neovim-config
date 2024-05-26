@@ -7,7 +7,7 @@ table.insert(flake8.args, "--ignore=E203")
 
 lint.linters_by_ft = {
 	-- javascript = { 'eslint_d', }
-	python = { "flake8" },
+	python = { "ruff" },
 	elixir = { "credo" },
 	sh = { "credo" },
 }

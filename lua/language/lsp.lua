@@ -1,5 +1,7 @@
 local lsp_config = require("lspconfig")
 
+vim.lsp.set_log_level("debug")
+
 -- we use nvim-cmp for autocompletion
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -17,6 +19,9 @@ end
 -- python
 -- pyright is too strict
 lsp_config.pyright.setup({
+	capabilities = capabilities,
+})
+lsp_config.mypy.setup({
 	capabilities = capabilities,
 })
 -- lsp_config.pylsp.setup({
@@ -68,11 +73,14 @@ lsp_config.tsserver.setup({
 
 lsp_config.rescriptls.setup({
 	cmd = { "rescript-language-server", "--stdio" },
-	capabilities = capabilities,
+	root_dir = function()
+		return "/Users/timokha/Projects/Nablaflow/nabla_core/assets/"
+	end,
+	-- capabilities = capabilities,
 	init_options = {
 		{
 			extensionConfiguration = {
-				askToStartBuild = false,
+				askToStartBuild = true,
 
 				allowBuiltInFormatter = true,
 				inlayHints = {

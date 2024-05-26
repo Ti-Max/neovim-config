@@ -35,7 +35,8 @@ return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 	-- rescript
-	{ "rescript-lang/vim-rescript", ft = "rescript" },
+	-- { "rescript-lang/vim-rescript", ft = "rescript" },
+	{ "nkrkv/nvim-treesitter-rescript" },
 
 	-- lsp client
 	"neovim/nvim-lspconfig",
@@ -251,5 +252,11 @@ return {
 				no_line_number = true,
 			})
 		end,
+	},
+	{
+		"j-hui/fidget.nvim",
+		opts = {
+			-- options
+		},
 	},
 }

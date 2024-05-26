@@ -16,8 +16,16 @@ require("mason-lspconfig").setup({
 		--"elixirls",
 
 		"svelte",
+		-- "mypy",
+		-- "ruff",
 	},
 })
+
+-- require("mason-lspconfig").setup_handlers({
+-- 	function(server_name) -- default handler (optional)
+-- 		require("lspconfig")[server_name].setup({})
+-- 	end,
+-- })
 
 -----------------------------------INSTALL-FORMATTERS-&-LINTERS-------------------------------------------
 -- instlal non-lsp formatter and linters automatically
@@ -31,7 +39,7 @@ require("mason-tool-installer").setup({
 		"tailwindcss",
 		"emmet_ls",
 		--python
-		"black",
-		"autoflake",
+		"mypy",
+		"ruff",
 	},
 })

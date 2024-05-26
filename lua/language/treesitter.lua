@@ -12,6 +12,7 @@ require("nvim-treesitter.configs").setup({
 		"markdown",
 		"markdown_inline",
 		"svelte",
+		"rescript",
 	},
 	sync_install = false,
 	auto_install = false,
