@@ -31,10 +31,6 @@ vim.keymap.set("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>')
 -- vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j")
 -- vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k")
 
-vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
-vim.keymap.set("n", "<A-3>", ":ToggleTerm direction=float<CR>")
-vim.keymap.set("n", "<A-2>", ":ToggleTerm direction=vertical<CR>")
-
 -- open config
 vim.keymap.set("n", "<leader>i", ":e ~/.config/nvim/init.lua<CR>")
 vim.keymap.set("n", "<leader>Cp", ":e ~/.config/nvim/lua/plugins.lua<CR>")
@@ -114,6 +110,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- create JSDOC automatically
 vim.keymap.set("n", "<leader>ld", ":DogeGenerate<CR>")
 
+-- open compiled js file
+-- re for REscript
+-- vim.keymap.set("n", "<leader>re", function()
+-- 	local file_name = vim.api.nvim_command("edit " .. file_name)
+-- end)
+--
+-- vim.cmd("checktime " .. filename .. ".res.mjs")
+
 ----------------------------------FORMATTING------------------------------------------
 vim.keymap.set("n", "<leader>lf", function()
 	require("language.formatters").format_buffer()
@@ -124,3 +128,21 @@ vim.keymap.set("n", "<leader>li", ":OrganizeImports<CR>")
 
 -- Screenshot (Code Clip)
 vim.keymap.set("v", "<leader>cc", ":Silicon<CR>")
+
+-- local P = {}
+-- function P.get_lsp_root_dir()
+-- 	local clients = vim.lsp.get_active_clients()
+-- 	if next(clients) == nil then
+-- 		print("No active LSP clients")
+-- 		return
+-- 	end
+--
+-- 	-- Get the root directory of the first active client
+-- 	local client = clients[1]
+-- 	local root_dir = client.config.root_dir
+-- 	print("LSP Root Directory: " .. root_dir)
+--
+-- 	return root_dir
+-- end
+--
+-- return P

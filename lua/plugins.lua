@@ -1,4 +1,5 @@
 return {
+	-- integration with tmux
 	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {
@@ -35,7 +36,7 @@ return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 	-- rescript
-	-- { "rescript-lang/vim-rescript", ft = "rescript" },
+	{ "rescript-lang/vim-rescript", ft = "rescript" },
 	{ "nkrkv/nvim-treesitter-rescript" },
 
 	-- lsp client
@@ -48,8 +49,10 @@ return {
 	"mfussenegger/nvim-lint",
 
 	-- better diagnostic UI
+	-- never used I think
 	"folke/trouble.nvim",
 
+	-- for js
 	{
 		"kkoomen/vim-doge",
 		run = ":call doge#install()",
@@ -70,6 +73,7 @@ return {
 	},
 
 	-- TODO: configure
+	-- do I need it?
 	{
 		"nvimdev/lspsaga.nvim",
 		config = function()
@@ -77,28 +81,16 @@ return {
 		end,
 	},
 
+	-- pairs for brackets etc.
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		opts = {}, -- this is equalent to setup({}) function
 	},
 
-	-- {
-	-- 	"akinsho/bufferline.nvim",
-	-- 	version = "*",
-	-- 	config = function()
-	-- 		local bufferline = require("bufferline")
-	-- 		bufferline.setup({
-	-- 			options = {
-	-- 				-- TODO:
-	-- 				-- separator_style = "thick",
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
-
 	{ "lukas-reineke/indent-blankline.nvim" },
 
+	-- highlight current word
 	"RRethy/vim-illuminate",
 
 	{
@@ -106,6 +98,7 @@ return {
 		event = "BufRead",
 	},
 
+	-- find and replace
 	{
 		"windwp/nvim-spectre",
 		event = "BufRead",
@@ -113,6 +106,7 @@ return {
 			require("spectre").setup()
 		end,
 	},
+	-- Is it working?
 	{
 		"roobert/tailwindcss-colorizer-cmp.nvim",
 		-- optionally, override the default options:
@@ -123,6 +117,7 @@ return {
 		end,
 	},
 
+	-- Same as above?
 	{
 		"themaxmarchuk/tailwindcss-colors.nvim",
 		module = "tailwindcss-colors",
@@ -137,15 +132,6 @@ return {
 		event = { "BufEnter", "BufNewFile" },
 		config = function()
 			require("nvim-highlight-colors").setup({})
-		end,
-	},
-
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-
-		config = function()
-			require("toggleterm").setup()
 		end,
 	},
 	---------------------------------------------
@@ -183,16 +169,7 @@ return {
 	"nvim-lua/popup.nvim",
 	"nvim-telescope/telescope-media-files.nvim",
 
-	-- which key pop up menu (remove in the future)
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
-	},
-
+	-- display images in the terminal. Do I need it?
 	{
 		"edluffy/hologram.nvim",
 		config = function()
@@ -253,6 +230,7 @@ return {
 			})
 		end,
 	},
+	-- UI on the right bottom corner for loading stuff
 	{
 		"j-hui/fidget.nvim",
 		opts = {

@@ -1,3 +1,11 @@
+-- local ok, wf = pcall(require, "vim.lsp._watchfiles")
+-- if ok then
+-- 	-- disable lsp watcher. Too slow on linux
+-- 	wf._watchfunc = function()
+-- 		return function() end
+-- 	end
+-- end
+--
 local lsp_config = require("lspconfig")
 
 vim.lsp.set_log_level("debug")
@@ -82,7 +90,7 @@ lsp_config.rescriptls.setup({
 			extensionConfiguration = {
 				askToStartBuild = true,
 
-				allowBuiltInFormatter = true,
+				allowBuiltInFormatter = false,
 				inlayHints = {
 					enable = true,
 					maxLength = nil,
@@ -152,11 +160,27 @@ lsp_config.rust_analyzer.setup({
 -- tialwind
 lsp_config.tailwindcss.setup({
 	cmd = { "tailwindcss-language-server", "--stdio" },
+	root_dir = function()
+		return "/Users/timokha/Projects/Nablaflow/nabla_core/assets/"
+	end,
+	single_file_support = true,
+
 	init_options = {
 		userLanguages = {
 			eelixir = "html",
 			elixir = "html",
-			eruby = "erb",
+			heex = "html",
+			eex = "html",
+			["phoenix-heex"] = "html",
+			phoenix_heex = "html",
+		},
+		includeLanguages = {
+			eelixir = "html",
+			elixir = "html",
+			["phoenix-heex"] = "html",
+			heex = "html",
+			eex = "html",
+			phoenix_heex = "html",
 		},
 	},
 	capabilities = capabilities,
