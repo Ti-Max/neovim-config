@@ -69,7 +69,7 @@ lsp_config.lua_ls.setup({
 })
 
 -- javascript
-lsp_config.tsserver.setup({
+lsp_config.ts_ls.setup({
 	capabilities = capabilities,
 	commands = {
 		OrganizeImports = {
@@ -160,9 +160,8 @@ lsp_config.rust_analyzer.setup({
 -- tialwind
 lsp_config.tailwindcss.setup({
 	cmd = { "tailwindcss-language-server", "--stdio" },
-	root_dir = function()
-		return "/Users/timokha/Projects/Nablaflow/nabla_core/assets/"
-	end,
+	classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+
 	single_file_support = true,
 
 	init_options = {
@@ -234,3 +233,6 @@ lsp_config.tailwindcss.setup({
 		"svelte",
 	},
 })
+
+-- nix
+lsp_config.nil_ls.setup({})

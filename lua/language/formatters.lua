@@ -3,7 +3,7 @@ local format_on_save = {
 	"lua",
 	"yaml",
 	"json",
-	"elixir",
+	-- "elixir",
 	"css",
 	-- "rescript",
 }
@@ -61,10 +61,13 @@ function P.format_buffer()
 		or vim.bo.filetype == "html"
 	then
 		vim.cmd("silent FormatWrite")
+	elseif vim.bo.filetype == "elixir" or vim.bo.filetype == "heex" then
+		vim.cmd("silent exec 'w'")
+		vim.cmd("silent exec '!mix format'")
 	else
 		-- Use builtin to lsp formatter
-		vim.lsp.buf.format()
-		vim.cmd("write")
+		vim.lsp.buf.format({ async = true })
+		-- vim.cmd("write")
 
 		-- update compiles rescript on buffer save
 		-- if vim.bo.filetype == "rescript" then
@@ -94,6 +97,7 @@ require("formatter").setup({
 		json = { prettierd },
 		css = { prettierd },
 		html = { prettierd },
+		gotmpl = { prettierd },
 		glsl = { require("formatter.defaults.clangformat") },
 		nix = { require("formatter.filetypes.nix").nixpkgs_fmt },
 		["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },

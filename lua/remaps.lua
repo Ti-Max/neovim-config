@@ -67,10 +67,14 @@ vim.keymap.set("n", "<leader>gw", "<cmd>DiffviewOpen<CR>")
 vim.keymap.set("n", "<leader>gq", "<cmd>DiffviewClose<CR>")
 
 ----------------------------------LSP-----------------------------------------------
--- diagnostics menu
-vim.keymap.set("n", "<leader>t", ":TroubleToggle<CR>")
-vim.keymap.set("t", "<leader>t", ":TroubleToggle<CR>")
+-- copilot
+vim.keymap.set("i", "<C-y>", 'copilot#Accept("\\<CR>")', {
+	expr = true,
+	replace_keycodes = false,
+})
+vim.g.copilot_no_tab_map = true
 
+-- diagnostics menu
 vim.keymap.set("n", "<leader>k", ":Lspsaga show_line_diagnostics<CR>")
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)

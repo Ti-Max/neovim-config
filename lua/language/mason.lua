@@ -9,7 +9,7 @@ require("mason-lspconfig").setup({
 		-- lua
 		"lua_ls",
 		-- javascript
-		"tsserver",
+		"ts_ls",
 		"eslint",
 		-- elixir
 		-- DOES NOT WORK, you need to install it manually

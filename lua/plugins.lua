@@ -28,8 +28,7 @@ return {
 	"hrsh7th/cmp-nvim-lua",
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-path",
-	"L3MON4D3/LuaSnip",
-
+	{ "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } },
 	-- lsp servers manager
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
@@ -56,6 +55,10 @@ return {
 	{
 		"kkoomen/vim-doge",
 		run = ":call doge#install()",
+	},
+
+	{
+		"github/copilot.vim",
 	},
 	---------------------------------------------
 	{
@@ -103,7 +106,23 @@ return {
 		"windwp/nvim-spectre",
 		event = "BufRead",
 		config = function()
-			require("spectre").setup()
+			require("spectre").setup({
+				find_engine = {
+					-- rg is map with finder_cmd
+					["rg"] = {
+						cmd = "rg",
+						-- default args
+						args = {
+							"--color=never",
+							"--no-heading",
+							"--with-filename",
+							"--line-number",
+							"--column",
+							"--pcre2",
+						},
+					},
+				},
+			})
 		end,
 	},
 	-- Is it working?
@@ -137,14 +156,29 @@ return {
 	---------------------------------------------
 	-- UI
 	--
+	-- {
+	-- 	"f-person/auto-dark-mode.nvim",
+	-- 	opts = {
+	-- 		update_interval = 1000,
+	-- 		set_dark_mode = function()
+	-- 			vim.cmd("colorscheme tokyonight")
+	-- 		end,
+	-- 		set_light_mode = function()
+	-- 			vim.cmd("colorscheme catppuccin-latte")
+	-- 		end,
+	-- 	},
+	-- },
 	-- colorscheme
 	{ "rose-pine/neovim", name = "rose-pine" },
 	"folke/tokyonight.nvim",
+	{ "catppuccin/nvim", name = "catppuccin" },
 	-- file manager
 	{
 		"nvim-tree/nvim-tree.lua",
 		config = function()
 			require("nvim-tree").setup({
+				view = { adaptive_size = true },
+
 				update_focused_file = {
 					enable = true,
 					-- update_root = true,
