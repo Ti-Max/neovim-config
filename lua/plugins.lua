@@ -42,7 +42,10 @@ return {
 	"neovim/nvim-lspconfig",
 
 	-- to use non-lsp formatter like prettier or stylua
-	"mhartington/formatter.nvim",
+	{
+		"stevearc/conform.nvim",
+		opts = {},
+	},
 
 	-- linter (for non-lsp linters)
 	"mfussenegger/nvim-lint",

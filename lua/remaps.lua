@@ -124,7 +124,7 @@ vim.keymap.set("n", "<leader>ld", ":DogeGenerate<CR>")
 
 ----------------------------------FORMATTING------------------------------------------
 vim.keymap.set("n", "<leader>lf", function()
-	require("language.formatters").format_buffer()
+	require("conform").format()
 end)
 
 -- organize import using tsserver. Warnign: conflicts a bit with prettier formatter

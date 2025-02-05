@@ -8,7 +8,7 @@
 --
 local lsp_config = require("lspconfig")
 
-vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("off")
 
 -- we use nvim-cmp for autocompletion
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
