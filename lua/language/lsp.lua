@@ -1,60 +1,13 @@
--- local ok, wf = pcall(require, "vim.lsp._watchfiles")
--- if ok then
--- 	-- disable lsp watcher. Too slow on linux
--- 	wf._watchfunc = function()
--- 		return function() end
--- 	end
--- end
---
-local lsp_config = require("lspconfig")
-
 vim.lsp.set_log_level("off")
 
 -- we use nvim-cmp for autocompletion
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local function organize_imports()
-	local params = {
-		command = "_typescript.organizeImports",
-		arguments = { vim.api.nvim_buf_get_name(0) },
-		title = "",
-	}
-	vim.lsp.buf.execute_command(params)
-end
-
--- setup lsp clients
-
 -- python
--- pyright is too strict
-lsp_config.pyright.setup({
-	capabilities = capabilities,
-})
--- lsp_config.mypy.setup({
--- 	capabilities = capabilities,
--- })
--- lsp_config.pylsp.setup({
--- 	capabilities = capabilities,
--- })
--- lsp_config.pylyzer.setup({
--- 	capabilities = capabilities,
--- 	single_file_support = true,
--- 	settings = {
--- 		python = {
---
--- 			checkOnType = false,
--- 			diagnostics = true,
--- 			inlayHints = true,
--- 			smartCompletion = true,
--- 		},
--- 	},
--- })
-
--- lsp_config.jedi_language_server.setup({
--- 	capabilities = capabilities,
--- })
+vim.lsp.config("pyright", { capabilities = capabilities })
 
 -- lua
-lsp_config.lua_ls.setup({
+vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -69,26 +22,15 @@ lsp_config.lua_ls.setup({
 })
 
 -- javascript
-lsp_config.ts_ls.setup({
-	capabilities = capabilities,
-	commands = {
-		OrganizeImports = {
-			organize_imports,
-			description = "Organize Imports",
-		},
-	},
-})
+vim.lsp.config("ts_ls", { capabilities = capabilities })
 
-lsp_config.rescriptls.setup({
+vim.lsp.config("rescriptls", {
 	cmd = { "rescript-language-server", "--stdio" },
-	-- root_dir = function()
-	-- 	return "/Users/timokha/Projects/Nablaflow/nabla_core/assets/"
-	-- end,
 	capabilities = capabilities,
 	init_options = {
 		{
 			extensionConfiguration = {
-				askToStartBuild = true,
+				askToStartBuild = false,
 
 				allowBuiltInFormatter = false,
 				inlayHints = {
@@ -101,75 +43,42 @@ lsp_config.rescriptls.setup({
 	},
 })
 
-lsp_config.fsautocomplete.setup({
+vim.lsp.config("fsautocomplete", {
 	cmd = { "fsautocomplete", "--adaptive-lsp-server-enabled" },
 	capabilities = capabilities,
 })
 
-lsp_config.eslint.setup({
-	capabilities = capabilities,
-})
-
-lsp_config.svelte.setup({
-	capabilities = capabilities,
-})
+vim.lsp.config("eslint", { capabilities = capabilities })
 
 -- elixir
-lsp_config.lexical.setup({
+vim.lsp.config("expert", {
 	cmd = { "expert", "--stdio" },
-	root_dir = function(fname)
-		return require("lspconfig").util.root_pattern("mix.exs", ".git")(fname) or vim.loop.cwd()
-	end,
+	root_markers = { "mix.exs", ".git" },
 	filetypes = { "elixir", "eelixir", "heex" },
-	-- optional settings
-	settings = {},
-})
--- lsp_config.nextls.setup({})
-
--- lsp_config.elixirls.setup({
--- cmd = { "/home/timofei/.config/nvim/ls/elixir-ls/language_server.sh" },
--- cmd = { "/Home/timokha/elixir-ls/language_server.sh" },
--- cmd = { "~/elixir-ls/language_server.sh" },
--- 	cmd = { "elixir-ls" },
--- 	capabilities = capabilities,
--- })
-
---yaml
-lsp_config.yamlls.setup({
-	capabilities = capabilities,
 })
 
--- snippets
-lsp_config.emmet_ls.setup({
-	capabilities = capabilities,
-	filetypes = {
-		"css",
-		"html",
-		"heex",
-	},
-})
+vim.lsp.enable("expert")
+
+-- yaml
+vim.lsp.config("yamlls", { capabilities = capabilities })
 
 -- glsl
-lsp_config.glslls.setup({
+vim.lsp.config("glslls", {
 	cmd = { "glslls", "--stdin", "--target-env", "opengl" },
 	capabilities = capabilities,
 })
 
 -- go
-lsp_config.gopls.setup({
-	capabilities = capabilities,
-})
+vim.lsp.config("gopls", { capabilities = capabilities })
 
 -- c
-lsp_config.clangd.setup({
-	capabilities = capabilities,
-})
+vim.lsp.config("clangd", { capabilities = capabilities })
 
 -- Dockerfile
-lsp_config.dockerls.setup({})
+vim.lsp.config("dockerls", {})
 
 -- Rust
-lsp_config.rust_analyzer.setup({
+vim.lsp.config("rust_analyzer", {
 	capabilities = capabilities,
 	settings = {
 		["rust-analyzer"] = {
@@ -181,7 +90,7 @@ lsp_config.rust_analyzer.setup({
 })
 
 -- tialwind
-lsp_config.tailwindcss.setup({
+vim.lsp.config("tailwindcss", {
 	cmd = { "tailwindcss-language-server", "--stdio" },
 	classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
 
@@ -189,16 +98,12 @@ lsp_config.tailwindcss.setup({
 
 	init_options = {
 		userLanguages = {
-			-- eelixir = "html",
-			-- elixir = "html",
 			heex = "html",
 			eex = "html",
 			["phoenix-heex"] = "html",
 			phoenix_heex = "html",
 		},
 		includeLanguages = {
-			-- eelixir = "html",
-			-- elixir = "html",
 			["phoenix-heex"] = "html",
 			heex = "html",
 			eex = "html",
@@ -215,8 +120,6 @@ lsp_config.tailwindcss.setup({
 		"django-html",
 		"htmldjango",
 		"edge",
-		-- "eelixir",
-		-- "elixir",
 		"ejs",
 		"erb",
 		"eruby",
@@ -258,4 +161,4 @@ lsp_config.tailwindcss.setup({
 })
 
 -- nix
-lsp_config.nil_ls.setup({})
+vim.lsp.config("nil_ls", { capabilities = capabilities })

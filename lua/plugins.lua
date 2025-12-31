@@ -30,29 +30,17 @@ return {
 	"hrsh7th/cmp-path",
 	{ "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } },
 	-- lsp servers manager
-	"williamboman/mason.nvim",
-	"williamboman/mason-lspconfig.nvim",
-	"WhoIsSethDaniel/mason-tool-installer.nvim",
+	{ "mason-org/mason.nvim", opts = {} },
 
-	-- rescript
-	{ "rescript-lang/vim-rescript", ft = "rescript" },
 	{ "nkrkv/nvim-treesitter-rescript" },
 
-	-- lsp client
 	"neovim/nvim-lspconfig",
 
 	-- to use non-lsp formatter like prettier or stylua
-	{
-		"stevearc/conform.nvim",
-		opts = {},
-	},
+	{ "stevearc/conform.nvim", opts = {} },
 
 	-- linter (for non-lsp linters)
 	"mfussenegger/nvim-lint",
-
-	-- better diagnostic UI
-	-- never used I think
-	"folke/trouble.nvim",
 
 	-- for js
 	{
@@ -60,10 +48,7 @@ return {
 		run = ":call doge#install()",
 	},
 
-	{
-		-- It is not possible to remove the free trial has ended message !!!!!!!!!!!!!!
-		"github/copilot.vim",
-	},
+	{ "github/copilot.vim" },
 	---------------------------------------------
 	{
 		"numToStr/Comment.nvim",
@@ -78,24 +63,6 @@ return {
 			require("gitsigns").setup({})
 		end,
 	},
-
-	-- TODO: configure
-	-- do I need it?
-	{
-		"nvimdev/lspsaga.nvim",
-		config = function()
-			require("lspsaga").setup({})
-		end,
-	},
-
-	-- pairs for brackets etc.
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		opts = {}, -- this is equalent to setup({}) function
-	},
-
-	{ "lukas-reineke/indent-blankline.nvim" },
 
 	-- highlight current word
 	"RRethy/vim-illuminate",
@@ -129,26 +96,6 @@ return {
 			})
 		end,
 	},
-	-- Is it working?
-	{
-		"roobert/tailwindcss-colorizer-cmp.nvim",
-		-- optionally, override the default options:
-		config = function()
-			require("tailwindcss-colorizer-cmp").setup({
-				color_square_width = 2,
-			})
-		end,
-	},
-
-	-- Same as above?
-	{
-		"themaxmarchuk/tailwindcss-colors.nvim",
-		module = "tailwindcss-colors",
-		event = { "BufEnter", "BufNewFile" },
-		config = function()
-			require("tailwindcss-colors").setup()
-		end,
-	},
 
 	{
 		"brenoprata10/nvim-highlight-colors",
@@ -159,37 +106,9 @@ return {
 	},
 	---------------------------------------------
 	-- UI
-	--
-	-- {
-	-- 	"f-person/auto-dark-mode.nvim",
-	-- 	opts = {
-	-- 		update_interval = 1000,
-	-- 		set_dark_mode = function()
-	-- 			vim.cmd("colorscheme tokyonight")
-	-- 		end,
-	-- 		set_light_mode = function()
-	-- 			vim.cmd("colorscheme catppuccin-latte")
-	-- 		end,
-	-- 	},
-	-- },
 	-- colorscheme
 	{ "rose-pine/neovim", name = "rose-pine" },
 	"folke/tokyonight.nvim",
-	{ "catppuccin/nvim", name = "catppuccin" },
-	-- file manager
-	{
-		"nvim-tree/nvim-tree.lua",
-		config = function()
-			require("nvim-tree").setup({
-				view = { adaptive_size = true },
-
-				update_focused_file = {
-					enable = true,
-					-- update_root = true,
-				},
-			})
-		end,
-	},
 	-- cool icons
 	"nvim-tree/nvim-web-devicons",
 
@@ -207,55 +126,71 @@ return {
 	"nvim-lua/popup.nvim",
 	"nvim-telescope/telescope-media-files.nvim",
 
-	{
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("lualine").setup({
-				-- sections = {
-				-- 	lualine_a = {
-				-- 		{
-				-- 			"filename",
-				-- 			file_status = true, -- Displays file status (readonly status, modified status)
-				-- 			newfile_status = false, -- Display new file status (new file means no write after created)
-				-- 			path = 0, -- 0: Just the filename
-				-- 			-- 1: Relative path
-				-- 			-- 2: Absolute path
-				-- 			-- 3: Absolute path, with tilde as the home directory
-				-- 			-- 4: Filename and parent dir, with tilde as the home directory
-				--
-				-- 			shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-				-- 			-- for other components. (terrible name, any suggestions?)
-				-- 			symbols = {
-				-- 				modified = "[+]", -- Text to show when the file is modified.
-				-- 				readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-				-- 				unnamed = "[No Name]", -- Text to show for unnamed buffers.
-				-- 				newfile = "[New]", -- Text to show for newly created file before first write
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
-			})
-		end,
+---@type LazySpec
+{
+	"mikavilpas/yazi.nvim",
+	version = "*", -- use the latest stable version
+	event = "VeryLazy",
+	dependencies = {
+		{ "nvim-lua/plenary.nvim", lazy = true },
 	},
-	-- take cool screenshots
-	{
-		"michaelrommel/nvim-silicon",
-		lazy = true,
-		cmd = "Silicon",
-		config = function()
-			require("silicon").setup({
-				-- Configuration here, or leave empty to use defaults
-				font = "VictorMono",
-				to_clipboard = true,
-				-- window_title = function()
-				-- 	return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ":t")
-				-- end,
-				theme = "Dracula",
-				background = "#6190b0",
-				shadow_color = nil,
-				-- no_window_controls = true,
-				no_line_number = true,
-			})
-		end,
+	keys = {
+		-- 👇 in this section, choose your own keymappings!
+		{
+			"<leader>e",
+			mode = { "n", "v" },
+			"<cmd>Yazi<cr>",
+			desc = "Open yazi at the current file",
+		},
+		{
+			-- Open in the current working directory
+			"<leader>cw",
+			"<cmd>Yazi cwd<cr>",
+			desc = "Open the file manager in nvim's working directory",
+		},
+		{
+			"<c-up>",
+			"<cmd>Yazi toggle<cr>",
+			desc = "Resume the last yazi session",
+		},
 	},
+	---@type YaziConfig | {}
+	opts = {
+		-- if you want to open yazi instead of netrw, see below for more info
+		open_for_directories = false,
+		keymaps = {
+			show_help = "<f1>",
+		},
+	},
+	-- 👇 if you use `open_for_directories=true`, this is recommended
+	init = function()
+		-- mark netrw as loaded so it's not loaded at all.
+		--
+		-- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
+		vim.g.loaded_netrwPlugin = 1
+	end,
 }
+
+}
+--
+-- -- file manager
+-- {
+-- 	"nvim-tree/nvim-tree.lua",
+-- 	config = function()
+-- 		require("nvim-tree").setup({
+-- 			view = { adaptive_size = true },
+--
+-- 			update_focused_file = {
+-- 				enable = true,
+-- 				-- update_root = true,
+-- 			},
+-- 		})
+-- 	end,
+-- },
+
+-- -- pairs for brackets etc.
+-- {
+-- 	"windwp/nvim-autopairs",
+-- 	event = "InsertEnter",
+-- 	opts = {}, -- this is equalent to setup({}) function
+-- },

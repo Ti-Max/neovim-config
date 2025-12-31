@@ -1,5 +1,4 @@
 local conform = require("conform")
-local util = require("conform.util")
 
 require("conform").setup({
 
@@ -19,8 +18,6 @@ require("conform").setup({
 			gotmpl = { "gotmplfmt" },
 			glsl = { "clang-format" },
 			nix = { "alejandra" },
-      elixir = { "mix_format" },
-      heex = { "mix_format" },
 		},
 
 		formatters = {
@@ -29,11 +26,6 @@ require("conform").setup({
 				stdin = true,
 				args = { "-w", "70" },
 			},
-      mix_format = {
-        command = "mix",
-        args = { "format"},
-        stdin = false,
-      },
 		},
 
 		format_on_save = function(bufnr)
