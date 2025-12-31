@@ -61,6 +61,7 @@ return {
 	},
 
 	{
+		-- It is not possible to remove the free trial has ended message !!!!!!!!!!!!!!
 		"github/copilot.vim",
 	},
 	---------------------------------------------
@@ -206,16 +207,6 @@ return {
 	"nvim-lua/popup.nvim",
 	"nvim-telescope/telescope-media-files.nvim",
 
-	-- display images in the terminal. Do I need it?
-	{
-		"edluffy/hologram.nvim",
-		config = function()
-			require("hologram").setup({
-				auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
-			})
-		end,
-	},
-
 	{
 		"nvim-lualine/lualine.nvim",
 		config = function()
@@ -266,12 +257,5 @@ return {
 				no_line_number = true,
 			})
 		end,
-	},
-	-- UI on the right bottom corner for loading stuff
-	{
-		"j-hui/fidget.nvim",
-		opts = {
-			-- options
-		},
 	},
 }

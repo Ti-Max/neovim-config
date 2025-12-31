@@ -1,25 +1,47 @@
 local conform = require("conform")
+local util = require("conform.util")
 
-conform.setup({
-	default_format_opts = {
-		lsp_format = "fallback",
-	},
+require("conform").setup({
 
-	formatters_by_ft = {
-		lua = { "stylua" },
-		python = { "black", "autoflake" },
-		javascript = { "prettierd" },
-		yaml = { "prettierd" },
-		json = { "prettierd" },
-		css = { "prettierd" },
-		html = { "prettierd" },
-		gotmpl = { "prettierd" },
-		glsl = { "clang-format" },
-		nix = { "alejandra" },
-	},
+	conform.setup({
+		default_format_opts = {
+			lsp_format = "fallback",
+		},
 
-	format_on_save = {
-		-- These options will be passed to conform.format()
-		timeout_ms = 500,
-	},
+		formatters_by_ft = {
+			lua = { "stylua" },
+			python = { "black", "autoflake" },
+			javascript = { "asdfjs" },
+			yaml = { "prettierd" },
+			json = { "biome" },
+			css = { "biome" },
+			html = { "gotmplfmt" },
+			gotmpl = { "gotmplfmt" },
+			glsl = { "clang-format" },
+			nix = { "alejandra" },
+      elixir = { "mix_format" },
+      heex = { "mix_format" },
+		},
+
+		formatters = {
+			gotmplfmt = {
+				command = "gotmplfmt",
+				stdin = true,
+				args = { "-w", "70" },
+			},
+      mix_format = {
+        command = "mix",
+        args = { "format"},
+        stdin = false,
+      },
+		},
+
+		format_on_save = function(bufnr)
+			-- Disable autoformat on certain filetypes
+			local ignore_filetypes = { "elixir", "heex" }
+			if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+				return
+			end
+		end,
+	}),
 })

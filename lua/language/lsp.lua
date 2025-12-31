@@ -29,9 +29,9 @@ end
 lsp_config.pyright.setup({
 	capabilities = capabilities,
 })
-lsp_config.mypy.setup({
-	capabilities = capabilities,
-})
+-- lsp_config.mypy.setup({
+-- 	capabilities = capabilities,
+-- })
 -- lsp_config.pylsp.setup({
 -- 	capabilities = capabilities,
 -- })
@@ -81,10 +81,10 @@ lsp_config.ts_ls.setup({
 
 lsp_config.rescriptls.setup({
 	cmd = { "rescript-language-server", "--stdio" },
-	root_dir = function()
-		return "/Users/timokha/Projects/Nablaflow/nabla_core/assets/"
-	end,
-	-- capabilities = capabilities,
+	-- root_dir = function()
+	-- 	return "/Users/timokha/Projects/Nablaflow/nabla_core/assets/"
+	-- end,
+	capabilities = capabilities,
 	init_options = {
 		{
 			extensionConfiguration = {
@@ -101,6 +101,11 @@ lsp_config.rescriptls.setup({
 	},
 })
 
+lsp_config.fsautocomplete.setup({
+	cmd = { "fsautocomplete", "--adaptive-lsp-server-enabled" },
+	capabilities = capabilities,
+})
+
 lsp_config.eslint.setup({
 	capabilities = capabilities,
 })
@@ -110,13 +115,24 @@ lsp_config.svelte.setup({
 })
 
 -- elixir
-lsp_config.elixirls.setup({
-	-- cmd = { "/home/timofei/.config/nvim/ls/elixir-ls/language_server.sh" },
-	-- cmd = { "/Home/timokha/elixir-ls/language_server.sh" },
-	-- cmd = { "~/elixir-ls/language_server.sh" },
-	cmd = { "elixir-ls" },
-	capabilities = capabilities,
+lsp_config.lexical.setup({
+	cmd = { "expert", "--stdio" },
+	root_dir = function(fname)
+		return require("lspconfig").util.root_pattern("mix.exs", ".git")(fname) or vim.loop.cwd()
+	end,
+	filetypes = { "elixir", "eelixir", "heex" },
+	-- optional settings
+	settings = {},
 })
+-- lsp_config.nextls.setup({})
+
+-- lsp_config.elixirls.setup({
+-- cmd = { "/home/timofei/.config/nvim/ls/elixir-ls/language_server.sh" },
+-- cmd = { "/Home/timokha/elixir-ls/language_server.sh" },
+-- cmd = { "~/elixir-ls/language_server.sh" },
+-- 	cmd = { "elixir-ls" },
+-- 	capabilities = capabilities,
+-- })
 
 --yaml
 lsp_config.yamlls.setup({
@@ -155,6 +171,13 @@ lsp_config.dockerls.setup({})
 -- Rust
 lsp_config.rust_analyzer.setup({
 	capabilities = capabilities,
+	settings = {
+		["rust-analyzer"] = {
+			diagnostics = {
+				enable = true,
+			},
+		},
+	},
 })
 
 -- tialwind
@@ -166,16 +189,16 @@ lsp_config.tailwindcss.setup({
 
 	init_options = {
 		userLanguages = {
-			eelixir = "html",
-			elixir = "html",
+			-- eelixir = "html",
+			-- elixir = "html",
 			heex = "html",
 			eex = "html",
 			["phoenix-heex"] = "html",
 			phoenix_heex = "html",
 		},
 		includeLanguages = {
-			eelixir = "html",
-			elixir = "html",
+			-- eelixir = "html",
+			-- elixir = "html",
 			["phoenix-heex"] = "html",
 			heex = "html",
 			eex = "html",
@@ -192,8 +215,8 @@ lsp_config.tailwindcss.setup({
 		"django-html",
 		"htmldjango",
 		"edge",
-		"eelixir",
-		"elixir",
+		-- "eelixir",
+		-- "elixir",
 		"ejs",
 		"erb",
 		"eruby",
