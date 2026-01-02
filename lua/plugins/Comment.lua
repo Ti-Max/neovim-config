@@ -4,4 +4,9 @@ return require("Comment").setup({
 		---Line-comment toggle keymap
 		line = "<Space>/",
 	},
+	---LHS of operator-pending mappings in NORMAL and VISUAL mode
+	opleader = {
+		---Line-comment keymap
+		line = "<Space>/",
+	},
 })
