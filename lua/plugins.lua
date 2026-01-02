@@ -20,27 +20,27 @@ return {
 	---------------------------------------------
 	-- Language related
 	--
-	{ { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" } },
+	"neovim/nvim-lspconfig",
+  -- Syntax highlightning
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	{ "nkrkv/nvim-treesitter-rescript" },
 	-- autocompletion
-	"hrsh7th/nvim-cmp",
-	-- snippets
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-nvim-lua",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
-	{ "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } },
+	{
+		"saghen/blink.cmp",
+		dependencies = { "rafamadriz/friendly-snippets" },
+		version = "1.8.0",
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			keymap = { preset = "enter" },
+			completion = { documentation = { auto_show = true } },
+		},
+	},
 	-- lsp servers manager
 	{ "mason-org/mason.nvim", opts = {} },
 
-	{ "nkrkv/nvim-treesitter-rescript" },
-
-	"neovim/nvim-lspconfig",
-
 	-- to use non-lsp formatter like prettier or stylua
 	{ "stevearc/conform.nvim", opts = {} },
-
-	-- linter (for non-lsp linters)
-	"mfussenegger/nvim-lint",
 
 	-- for js
 	{
@@ -48,7 +48,7 @@ return {
 		run = ":call doge#install()",
 	},
 
-	{ "github/copilot.vim" },
+	-- { "github/copilot.vim" },
 	---------------------------------------------
 	{
 		"numToStr/Comment.nvim",
@@ -126,51 +126,50 @@ return {
 	"nvim-lua/popup.nvim",
 	"nvim-telescope/telescope-media-files.nvim",
 
----@type LazySpec
-{
-	"mikavilpas/yazi.nvim",
-	version = "*", -- use the latest stable version
-	event = "VeryLazy",
-	dependencies = {
-		{ "nvim-lua/plenary.nvim", lazy = true },
+	---@type LazySpec
+	{
+		"mikavilpas/yazi.nvim",
+		version = "*", -- use the latest stable version
+		event = "VeryLazy",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim", lazy = true },
+		},
+		keys = {
+			-- 👇 in this section, choose your own keymappings!
+			{
+				"<leader>e",
+				mode = { "n", "v" },
+				"<cmd>Yazi<cr>",
+				desc = "Open yazi at the current file",
+			},
+			{
+				-- Open in the current working directory
+				"<leader>cw",
+				"<cmd>Yazi cwd<cr>",
+				desc = "Open the file manager in nvim's working directory",
+			},
+			{
+				"<c-up>",
+				"<cmd>Yazi toggle<cr>",
+				desc = "Resume the last yazi session",
+			},
+		},
+		---@type YaziConfig | {}
+		opts = {
+			-- if you want to open yazi instead of netrw, see below for more info
+			open_for_directories = false,
+			keymaps = {
+				show_help = "<f1>",
+			},
+		},
+		-- 👇 if you use `open_for_directories=true`, this is recommended
+		init = function()
+			-- mark netrw as loaded so it's not loaded at all.
+			--
+			-- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
+			vim.g.loaded_netrwPlugin = 1
+		end,
 	},
-	keys = {
-		-- 👇 in this section, choose your own keymappings!
-		{
-			"<leader>e",
-			mode = { "n", "v" },
-			"<cmd>Yazi<cr>",
-			desc = "Open yazi at the current file",
-		},
-		{
-			-- Open in the current working directory
-			"<leader>cw",
-			"<cmd>Yazi cwd<cr>",
-			desc = "Open the file manager in nvim's working directory",
-		},
-		{
-			"<c-up>",
-			"<cmd>Yazi toggle<cr>",
-			desc = "Resume the last yazi session",
-		},
-	},
-	---@type YaziConfig | {}
-	opts = {
-		-- if you want to open yazi instead of netrw, see below for more info
-		open_for_directories = false,
-		keymaps = {
-			show_help = "<f1>",
-		},
-	},
-	-- 👇 if you use `open_for_directories=true`, this is recommended
-	init = function()
-		-- mark netrw as loaded so it's not loaded at all.
-		--
-		-- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
-		vim.g.loaded_netrwPlugin = 1
-	end,
-}
-
 }
 --
 -- -- file manager
