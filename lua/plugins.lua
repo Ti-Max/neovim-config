@@ -42,13 +42,13 @@ return {
 	-- to use non-lsp formatter like prettier or stylua
 	{ "stevearc/conform.nvim", opts = {} },
 
-	-- for js
+	-- to generate JSDoc
 	{
 		"kkoomen/vim-doge",
 		run = ":call doge#install()",
 	},
 
-	-- { "github/copilot.vim" },
+	{ "github/copilot.vim" },
 	---------------------------------------------
 	{
 		"numToStr/Comment.nvim",

@@ -38,6 +38,9 @@ vim.keymap.set("n", "<leader>ss", '<cmd>lua require("spectre").open_file_search(
 vim.keymap.set("n", "<leader>gw", "<cmd>DiffviewOpen<CR>")
 vim.keymap.set("n", "<leader>gq", "<cmd>DiffviewClose<CR>")
 
+--git signs
+vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>")
+
 ----------------------------------LSP-----------------------------------------------
 -- copilot
 vim.keymap.set("i", "<C-y>", 'copilot#Accept("\\<CR>")', {
