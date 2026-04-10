@@ -53,6 +53,15 @@ return {
 	},
 
 	-- { "github/copilot.vim" },
+	--
+	{
+		"coder/claudecode.nvim",
+		lazy = false,
+		opts = {
+			-- terminal_cmd = "/path/to/claude", -- from `which claude`
+		},
+		config = true,
+	},
 	---------------------------------------------
 	{
 		"numToStr/Comment.nvim",

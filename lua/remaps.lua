@@ -1,5 +1,7 @@
 -----------------------------VIM-----------------------------------------------
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
 
 -- copy to system clip board
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
@@ -70,7 +72,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- create JSDOC automatically
 vim.keymap.set("n", "<leader>ld", ":DogeGenerate<CR>")
 
-----------------------------------FORMATTING------------------------------------------
+-- Claude Code
+vim.keymap.set("n", "<leader>a", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude Code" })
+vim.keymap.set("v", "<leader>a", "<cmd>ClaudeCodeSend<CR>", { desc = "Send selection to Claude" })
+vim.keymap.set("n", "<leader>aa", "<cmd>ClaudeCodeAdd<CR>", { desc = "Add file to Claude context" })
+
+-- navigate out of terminal window without two-step <C-\><C-n>
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j")
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k")
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
+
+----------------------------------formattingus------------------------------------------
 vim.keymap.set("n", "<leader>lf", function()
 	require("conform").format()
 end)
