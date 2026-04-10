@@ -21,9 +21,13 @@ return {
 	-- Language related
 	--
 	"neovim/nvim-lspconfig",
-  -- Syntax highlightning
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-	{ "nkrkv/nvim-treesitter-rescript" },
+	-- Syntax highlightning
+	{
+		"neovim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 	-- autocompletion
 	{
 		"saghen/blink.cmp",
@@ -48,7 +52,7 @@ return {
 		run = ":call doge#install()",
 	},
 
-	{ "github/copilot.vim" },
+	-- { "github/copilot.vim" },
 	---------------------------------------------
 	{
 		"numToStr/Comment.nvim",
@@ -63,9 +67,6 @@ return {
 			require("gitsigns").setup({})
 		end,
 	},
-
-	-- highlight current word
-	"RRethy/vim-illuminate",
 
 	{
 		"sindrets/diffview.nvim",
@@ -107,7 +108,6 @@ return {
 	---------------------------------------------
 	-- UI
 	-- colorscheme
-	{ "rose-pine/neovim", name = "rose-pine" },
 	"folke/tokyonight.nvim",
 	-- cool icons
 	"nvim-tree/nvim-web-devicons",
@@ -171,25 +171,3 @@ return {
 		end,
 	},
 }
---
--- -- file manager
--- {
--- 	"nvim-tree/nvim-tree.lua",
--- 	config = function()
--- 		require("nvim-tree").setup({
--- 			view = { adaptive_size = true },
---
--- 			update_focused_file = {
--- 				enable = true,
--- 				-- update_root = true,
--- 			},
--- 		})
--- 	end,
--- },
-
--- -- pairs for brackets etc.
--- {
--- 	"windwp/nvim-autopairs",
--- 	event = "InsertEnter",
--- 	opts = {}, -- this is equalent to setup({}) function
--- },

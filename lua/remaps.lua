@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 -- copy to system clip board
-vim.keymap.set({"n", "v"}, "<leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 
 -- redo
 vim.keymap.set("", "U", "<cmd>redo<CR>")
@@ -51,8 +51,6 @@ vim.g.copilot_no_tab_map = true
 
 -- diagnostics menu
 vim.keymap.set("n", "<leader>k", vim.diagnostic.open_float)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- after the language server attaches to the current buffer

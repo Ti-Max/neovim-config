@@ -3,7 +3,6 @@ vim.opt.relativenumber = true
 vim.opt.nu = true
 vim.opt.winborder = "rounded"
 
-
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -28,3 +27,5 @@ vim.opt.hls = true
 
 -- set colorscheme
 vim.cmd.colorscheme("tokyonight-night")
+
+require("vim._core.ui2").enable()

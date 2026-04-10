@@ -1,4 +1,4 @@
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("OFF")
 
 vim.lsp.enable({
 	"pyright",
