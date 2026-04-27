@@ -29,3 +29,11 @@ vim.opt.hls = true
 vim.cmd.colorscheme("tokyonight-night")
 
 require("vim._core.ui2").enable()
+
+vim.diagnostic.config({
+	severity_sort = true, -- errors first, then warnings, hints, info
+-- 	virtual_text = {
+-- 		prefix = "●", -- icon before the message ("■", "▎", "✘", "●")
+-- 		severity_sort = true, -- errors before warnings on same line
+-- 	},
+})

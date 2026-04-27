@@ -23,10 +23,9 @@ return {
 	"neovim/nvim-lspconfig",
 	-- Syntax highlightning
 	{
-		"neovim-treesitter/nvim-treesitter",
+		"nvim-treesitter/nvim-treesitter",
 		lazy = false,
 		build = ":TSUpdate",
-		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	-- autocompletion
 	{
